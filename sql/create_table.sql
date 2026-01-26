@@ -2,7 +2,7 @@
 create database if not exists hsq_cloud_gallery;
 
 -- 切换库
-use hsq_cloud_gallery;
+use hsq_cloud_gallery ;
 
 -- 用户表
 create table if not exists user
