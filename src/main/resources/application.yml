@@ -15,7 +15,12 @@ spring:
     password: 123456
   profiles:
     active: local
-
+  # Redis 配置
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000
   # 开放更大的文件上传体积
   servlet:
     multipart:

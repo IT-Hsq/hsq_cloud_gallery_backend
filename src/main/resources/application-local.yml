@@ -1,8 +1,0 @@
-## 对象存储配置
-cos:
-  client:
-    host: https://cloud-gallery-100045955069.cos.ap-guangzhou.myqcloud.com
-    secretId: AKIDrZ8cuzvfCXfaHkz0oTu9D5nKfnhOtBF6
-    secretKey: kIemiR0NYYMyPddQzMYWHpAHBrKbeT7Y
-    region: ap-guangzhou
-    bucket: cloud-gallery-1396736391
