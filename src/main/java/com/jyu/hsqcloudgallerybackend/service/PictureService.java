@@ -1,14 +1,18 @@
 package com.jyu.hsqcloudgallerybackend.service;
 
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jyu.hsqcloudgallerybackend.api.aliyunai.model.CreateOutPaintingTaskResponse;
 import com.jyu.hsqcloudgallerybackend.model.dto.picture.*;
 import com.jyu.hsqcloudgallerybackend.model.entity.Picture;
 import com.jyu.hsqcloudgallerybackend.model.entity.User;
 import com.jyu.hsqcloudgallerybackend.model.vo.PictureVO;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 
 public interface PictureService extends IService<Picture> {
 
@@ -113,7 +117,7 @@ public interface PictureService extends IService<Picture> {
      * @param loginUser
      * @param picture
      */
-    //void checkPictureAuth(User loginUser, Picture picture);
+    void checkPictureAuth(User loginUser, Picture picture);
 
     /**
      * 根据颜色搜索图片
@@ -123,7 +127,7 @@ public interface PictureService extends IService<Picture> {
      * @param loginUser
      * @return
      */
-    //List<PictureVO> searchPictureByColor(Long spaceId, String picColor, User loginUser);
+    List<PictureVO> searchPictureByColor(Long spaceId, String picColor, User loginUser);
 
     /**
      * 批量编辑图片
@@ -139,5 +143,5 @@ public interface PictureService extends IService<Picture> {
      * @param createPictureOutPaintingTaskRequest
      * @param loginUser
      */
-    //CreateOutPaintingTaskResponse createPictureOutPaintingTask(CreatePictureOutPaintingTaskRequest createPictureOutPaintingTaskRequest, User loginUser);
+    CreateOutPaintingTaskResponse createPictureOutPaintingTask(CreatePictureOutPaintingTaskRequest createPictureOutPaintingTaskRequest, User loginUser);
 }

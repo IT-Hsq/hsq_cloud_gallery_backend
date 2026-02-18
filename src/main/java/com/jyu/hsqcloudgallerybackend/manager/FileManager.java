@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-//@Deprecated
+@Deprecated
 public class FileManager {
 
     @Resource

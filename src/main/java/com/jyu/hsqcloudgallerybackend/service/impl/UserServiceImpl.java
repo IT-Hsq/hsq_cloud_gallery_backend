@@ -2,6 +2,7 @@ package com.jyu.hsqcloudgallerybackend.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
@@ -12,6 +13,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jyu.hsqcloudgallerybackend.constant.UserConstant;
 import com.jyu.hsqcloudgallerybackend.exception.BusinessException;
 import com.jyu.hsqcloudgallerybackend.exception.ErrorCode;
+import com.jyu.hsqcloudgallerybackend.manager.auth.StpKit;
 import com.jyu.hsqcloudgallerybackend.mapper.UserMapper;
 import com.jyu.hsqcloudgallerybackend.model.dto.user.UserQueryRequest;
 import com.jyu.hsqcloudgallerybackend.model.dto.user.VipCode;
@@ -31,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
@@ -38,7 +41,8 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User>
+        implements UserService {
 
     /**
      * 用户注册
@@ -46,11 +50,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param userAccount   用户账户
      * @param userPassword  用户密码
      * @param checkPassword 校验密码
-     * @return
+     * @return 用户ID
      */
     @Override
     public long userRegister(String userAccount, String userPassword, String checkPassword) {
-        // 1. 校验参数
+        // 1. 校验参数：检查参数是否为空、长度是否符合要求、两次输入密码是否一致
         if (StrUtil.hasBlank(userAccount, userPassword, checkPassword)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数为空");
         }
@@ -76,7 +80,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User user = new User();
         user.setUserAccount(userAccount);
         user.setUserPassword(encryptPassword);
-        user.setUserName("");
+        user.setUserName("无名");
         user.setUserRole(UserRoleEnum.USER.getValue());
         boolean saveResult = this.save(user);
         if (!saveResult) {
@@ -112,8 +116,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 4. 保存用户的登录态
         request.getSession().setAttribute(UserConstant.USER_LOGIN_STATE, user);
         // 记录用户登录态到 Sa-token，便于空间鉴权时使用，注意保证该用户信息与 SpringSession 中的信息过期时间一致
-        //StpKit.SPACE.login(user.getId());
-        //StpKit.SPACE.getSession().set(UserConstant.USER_LOGIN_STATE, user);
+        StpKit.SPACE.login(user.getId());
+        StpKit.SPACE.getSession().set(UserConstant.USER_LOGIN_STATE, user);
         return this.getLoginUserVO(user);
     }
 
@@ -126,7 +130,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public String getEncryptPassword(String userPassword) {
         // 加盐，混淆密码
-        final String SALT = "hsq";
+        final String SALT = "yupi";
         return DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
     }
 
@@ -253,7 +257,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param vipCode
      * @return
      */
-    /*@Override
+    @Override
     public boolean exchangeVip(User user, String vipCode) {
         // 1. 参数校验
         if (user == null || StrUtil.isBlank(vipCode)) {
@@ -264,7 +268,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 3. 更新用户信息
         updateUserVipInfo(user, targetCode.getCode());
         return true;
-    }*/
+    }
 
     /**
      * 校验兑换码并标记为已使用
@@ -323,7 +327,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     /**
      * 更新用户会员信息
      */
-    /*private void updateUserVipInfo(User user, String usedVipCode) {
+    private void updateUserVipInfo(User user, String usedVipCode) {
         // 计算过期时间（当前时间 + 1 年）
         Date expireTime = DateUtil.offsetMonth(new Date(), 12); // 计算当前时间加 1 年后的时间
 
@@ -339,7 +343,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (!updated) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "开通会员失败，操作数据库失败");
         }
-    }*/
+    }
 
     // endregion ------- 以下代码为用户兑换会员功能 --------
 }

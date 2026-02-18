@@ -165,7 +165,7 @@ public class UserController {
     /**
      * 兑换会员
      */
-    /*@PostMapping("/exchange/vip")
+    @PostMapping("/exchange/vip")
     public BaseResponse<Boolean> exchangeVip(@RequestBody VipExchangeRequest vipExchangeRequest,
                                              HttpServletRequest httpServletRequest) {
         ThrowUtils.throwIf(vipExchangeRequest == null, ErrorCode.PARAMS_ERROR);
@@ -174,6 +174,6 @@ public class UserController {
         // 调用 service 层的方法进行会员兑换
         boolean result = userService.exchangeVip(loginUser, vipCode);
         return ResultUtils.success(result);
-    }*/
+    }
 
 }

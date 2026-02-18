@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 @Getter
 public enum UserRoleEnum {
-    //相当于枚举类的实例
+
     USER("用户", "user"),
     VIP("会员", "vip"),
     ADMIN("管理员", "admin");

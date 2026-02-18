@@ -52,17 +52,17 @@ public class User implements Serializable {
     /**
      * 会员过期时间
      */
-    //private Date vipExpireTime;
+    private Date vipExpireTime;
 
     /**
      * 会员兑换码
      */
-    //private String vipCode;
+    private String vipCode;
 
     /**
      * 会员编号
      */
-    //private Long vipNumber;
+    private Long vipNumber;
 
     /**
      * 编辑时间
