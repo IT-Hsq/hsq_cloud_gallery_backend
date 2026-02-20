@@ -9,7 +9,7 @@
       "key": "picture:view",
       "name": "查看图片",
       "description": "查看空间中的图片内容"
-    },
+    } ,
     {
       "key": "picture:upload",
       "name": "上传图片",

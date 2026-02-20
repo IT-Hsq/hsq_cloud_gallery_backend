@@ -1,4 +1,4 @@
-package com.jyu.hsqcloudgallerybackend.manager.auth.annotation;
+package com.jyu.hsqcloudgallerybackend.manager.auth.config;
 
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.strategy.SaAnnotationStrategy;

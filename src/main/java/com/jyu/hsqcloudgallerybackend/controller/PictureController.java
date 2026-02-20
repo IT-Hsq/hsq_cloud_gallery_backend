@@ -347,6 +347,7 @@ public class PictureController {
     /**
      * 以图搜图
      */
+    //TODO:待修复，百度接口失效
     @PostMapping("/search/picture")
     public BaseResponse<List<ImageSearchResult>> searchPictureByPicture(@RequestBody SearchPictureByPictureRequest searchPictureByPictureRequest) {
         ThrowUtils.throwIf(searchPictureByPictureRequest == null, ErrorCode.PARAMS_ERROR);

@@ -80,7 +80,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         User user = new User();
         user.setUserAccount(userAccount);
         user.setUserPassword(encryptPassword);
-        user.setUserName("无名");
+        user.setUserName(userAccount);
         user.setUserRole(UserRoleEnum.USER.getValue());
         boolean saveResult = this.save(user);
         if (!saveResult) {
@@ -130,7 +130,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Override
     public String getEncryptPassword(String userPassword) {
         // 加盐，混淆密码
-        final String SALT = "yupi";
+        final String SALT = "hsq";
         return DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
     }
 
@@ -143,6 +143,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR);
         }
         // 从数据库中查询（追求性能的话可以注释，直接返回上述结果）
+        // 避免由于后续用户信息变更，而读到的数据并不是最新的
         Long userId = currentUser.getId();
         currentUser = this.getById(userId);
         if (currentUser == null) {
