@@ -1,8 +1,11 @@
 package com.jyu.hsqcloudgallerybackend.controller;
 
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.jyu.hsqcloudgallerybackend.annotation.AuthCheck;
 import com.jyu.hsqcloudgallerybackend.api.aliyunai.AliYunAiApi;
 import com.jyu.hsqcloudgallerybackend.api.aliyunai.model.CreateOutPaintingTaskResponse;
@@ -33,13 +36,17 @@ import com.jyu.hsqcloudgallerybackend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 @Slf4j
@@ -68,12 +75,12 @@ public class PictureController {
     /**
      * 本地缓存
      */
-    /*private final Cache<String, String> LOCAL_CACHE = Caffeine.newBuilder()
+    private final Cache<String, String> LOCAL_CACHE = Caffeine.newBuilder()
             .initialCapacity(1024)
             .maximumSize(10_000L) // 最大 10000 条
             // 缓存 5 分钟后移除
             .expireAfterWrite(Duration.ofMinutes(5))
-            .build();*/
+            .build();
 
     /**
      * 上传图片（可重新上传）
@@ -247,7 +254,7 @@ public class PictureController {
     /**
      * 分页获取图片列表（封装类，有缓存）
      */
-    /*@Deprecated
+    @Deprecated
     @PostMapping("/list/page/vo/cache")
     public BaseResponse<Page<PictureVO>> listPictureVOByPageWithCache(@RequestBody PictureQueryRequest pictureQueryRequest,
                                                                       HttpServletRequest request) {
@@ -261,7 +268,7 @@ public class PictureController {
         // 构建缓存的 key
         String queryCondition = JSONUtil.toJsonStr(pictureQueryRequest);
         String hashKey = DigestUtils.md5DigestAsHex(queryCondition.getBytes());
-        String cacheKey = String.format("yupicture:listPictureVOByPage:%s", hashKey);
+        String cacheKey = String.format("picture:listPictureVOByPage:%s", hashKey);
         // 1. 先从本地缓存中查询
         String cachedValue = LOCAL_CACHE.getIfPresent(cacheKey);
         if (cachedValue != null) {
@@ -292,7 +299,7 @@ public class PictureController {
         LOCAL_CACHE.put(cacheKey, cacheValue);
         // 获取封装类
         return ResultUtils.success(pictureVOPage);
-    }*/
+    }
 
     /**
      * 编辑图片（给用户使用）
