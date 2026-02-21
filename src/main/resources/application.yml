@@ -36,11 +36,11 @@ spring:
   # 空间图片分表
   shardingsphere:
     datasource:
-      names: yu_picture
-      yu_picture:
+      names: hsq_cloud_gallery
+      hsq_cloud_gallery:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/yu_picture
+        url: jdbc:mysql://localhost:3306/hsq_cloud_gallery
         username: root
         password: 123456
     rules:
