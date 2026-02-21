@@ -22,24 +22,24 @@
 
 - 管理员对用户上传的图片进行审核、编辑、删除，并可批量抓取图片到公共图库
 
-![image-20260221213057104](C:\Users\黄胜强\AppData\Roaming\Typora\typora-user-images\image-20260221213057104.png)
-
+![企业级云图库功能截图](https://github.com/IT-Hsq/hsq_cloud_gallery_backend/raw/master/images/%E8%81%94%E6%83%B3%E6%88%AA%E5%9B%BE_20260221213049.png)
 
 -  私有空间：用户个人可将图片上传至私有空间进行批量管理、检索、编辑和分析，用作个人网盘、个人相册、素材库、作品集等
-
-![image-20260221213750374](C:\Users\黄胜强\AppData\Roaming\Typora\typora-user-images\image-20260221213750374.png)
+  
+![企业级云图库功能截图](https://github.com/IT-Hsq/hsq_cloud_gallery_backend/raw/master/images/%E8%81%94%E6%83%B3%E6%88%AA%E5%9B%BE_20260221213738.png)
 
 -  团队空间：对于企业，可开通团队空间并邀请成员共享图片；并实时协同编辑图片，提高团队协作效率。可用于提供商业服务，如企业活动相册、企业内部素材库等
 
-![image-20260221214108863](C:\Users\黄胜强\AppData\Roaming\Typora\typora-user-images\image-20260221214108863.png)
+![企业级云图库功能截图](https://github.com/IT-Hsq/hsq_cloud_gallery_backend/raw/master/images/%E8%81%94%E6%83%B3%E6%88%AA%E5%9B%BE_20260221214105.png)
 
 - 团队成员实时协作
 
-![image-20260221214615295](C:\Users\黄胜强\AppData\Roaming\Typora\typora-user-images\image-20260221214615295.png)
+![企业级云图库功能截图](https://github.com/IT-Hsq/hsq_cloud_gallery_backend/raw/master/images/%E8%81%94%E6%83%B3%E6%88%AA%E5%9B%BE_20260221214559.png)
 
 - 管理员进行空间分析，对空间额度使用比较高的团队，要重点关注，可对其进行商业价值分析，比如看看是否需要引导其升级空间等级，以获取更多的空间额度
 
-![image-20260221214821788](C:\Users\黄胜强\AppData\Roaming\Typora\typora-user-images\image-20260221214821788.png)
+![企业级云图库功能截图](https://github.com/IT-Hsq/hsq_cloud_gallery_backend/raw/master/images/%E8%81%94%E6%83%B3%E6%88%AA%E5%9B%BE_20260221214810.png)
+
 
 ### 1.3 核心目标
 
